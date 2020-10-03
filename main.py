@@ -28,19 +28,22 @@ fire = firebase.FirebaseApplication(
 answer_array = []
 question_array = ["Course Content", "Relevance of the course in the overall structure of program", "Overlap with other courses",
                   "Recommended Reading material was", "Class tests/mid-semester tests were conducted", "The class tests/mid-term tests were",
-                  "The teacher completes the entire syllabus in time","The teacher has subject knowledge",
+                  "The teacher completes the entire syllabus in time", "The teacher has subject knowledge",
                   "The teacher communicates clearly and inspires me by his/her teaching", "The teacher is punctual in the class",
-                  "The teacher comes well prepared for the class", "The teacher encourage participation and discussion in the class", 
+                  "The teacher comes well prepared for the class", "The teacher encourage participation and discussion in the class",
                   "The teacher uses teaching aids, handouts, gives suitable references, make presentations and conduct seminars/tutorials, etc.",
                   "The teacher's attitude towards students is friendly and helpful", "The teacher is available and accessible in the department",
                   "The evaluation process is fair and unbiased"]
 
 option_array = [["Can be covered in one semester", "Not enough for one semester", "Too much to be adequately covered in one semester", "Difficult to comment"], ["Very relevant", "Not at all relevant", "Reasonably relevant", "Difficult to comment"], ["No overlap", "Repetition of several topics",
-    "Some overlap", "Difficult to comment"], ["Adeqaute and relevant", "Mostly inadequate", "To some extent adequate and relevant", "Cannot comment"], ["As per schedule and satisfactorily", "In an unsatisfactory manner", "Never", "But were inadequate"], ["Difficult", "Balanced", "Easy", "Out of Syllabus"],
-    ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"],
-    ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"],
-    ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"],
-    ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"]]
+                                                                                                                                                                                                                                                          "Some overlap", "Difficult to comment"], ["Adeqaute and relevant", "Mostly inadequate", "To some extent adequate and relevant", "Cannot comment"], ["As per schedule and satisfactorily", "In an unsatisfactory manner", "Never", "But were inadequate"], ["Difficult", "Balanced", "Easy", "Out of Syllabus"],
+                ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree",
+                                                                                                            "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"],
+                ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree",
+                                                                                                            "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"],
+                ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree",
+                                                                                                            "Neither agree or disagree", "Agree", "Strongly Agree"], ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"],
+                ["Strongly Disagree", "Disagree", "Neither agree or disagree", "Agree", "Strongly Agree"]]
 
 
 # creates SMTP session
@@ -55,7 +58,7 @@ def sendEmail(message_body, to_email):
         # Authentication
 
         s.login("******", "******")
-        #Gmail account and password in place of *****
+        # Gmail account and password in place of *****
 
         # message to be sent
         message = message_body
@@ -77,8 +80,9 @@ def get_teacher_name():
     for items in result.values():
         arr.append(items)
     arr.sort()
-        # print(arr)
+    # print(arr)
     return arr
+
 
 def get_course_name():
     result = fire.get('/Course', None)
@@ -86,7 +90,7 @@ def get_course_name():
     for items in result.values():
         arr.append(items)
     arr.sort()
-        # print(arr)
+    # print(arr)
     return arr
 
 
@@ -98,6 +102,7 @@ def errorMessage(message):
     msg.setWindowTitle("WARNING")
     msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
     msg.exec_()
+
 
 class Authentication(QWidget):
 
@@ -161,7 +166,7 @@ class Consolidated_Form_Window(QWidget):
         label_semester = QLabel("Semester")
         label_semester.setStyleSheet(stylesheet_QLabel1)
         self.semester_cb = QComboBox()
-        self.semester_cb.addItems(['1', '2', '3','4','5','6','7','8'])
+        self.semester_cb.addItems(['1', '2', '3', '4', '5', '6', '7', '8'])
 
         label_email = QLabel("Administrator email")
         label_email.setStyleSheet(stylesheet_QLabel1)
@@ -195,9 +200,9 @@ class Consolidated_Form_Window(QWidget):
 
         feedbacks = []
         temp = []
-       
 
-        answer_array_temp = [[0 for i in range(4)] for j in range(6)] + [[0 for j in range(5)] for k in range(10)]
+        answer_array_temp = [[0 for i in range(4)] for j in range(
+            6)] + [[0 for j in range(5)] for k in range(10)]
 
         for course in courses_name:
             feedback_node = new_teacher_name + '/' + course
@@ -218,7 +223,8 @@ class Consolidated_Form_Window(QWidget):
                     answer_array_temp[j][answer_choice] += 1
                 print()
             course_response_array.append(answer_array_temp)
-            answer_array_temp = [[0 for i in range(4)] for j in range(6)] + [[0 for j in range(5)] for k in range(10)]
+            answer_array_temp = [[0 for i in range(4)] for j in range(
+                6)] + [[0 for j in range(5)] for k in range(10)]
 
         print(course_response_array)
 
@@ -232,41 +238,51 @@ class Consolidated_Form_Window(QWidget):
         print()
         print(len(courses_name))
 
-
         for i in range(len(courses_name)):
             message_header = "Teacher Name - " + self.teacher_name.currentText() + "\n" + "Semester - " + \
-                self.semester_cb.currentText() + "\n" + "Course Name - " + courses_name[i]
+                self.semester_cb.currentText() + "\n" + "Course Name - " + \
+                courses_name[i]
             message_body = "Consolidated Form: " + "\n\n"
             for j in range(6):
                 message_body += str(j+1) + ". "
                 message_body += question_array[j] + "\n"
                 message_body += "(a) "
-                message_body += option_array[j][0] + ": " + str(course_response_array[i][j][0]) + "\n"
+                message_body += option_array[j][0] + ": " + \
+                    str(course_response_array[i][j][0]) + "\n"
                 message_body += "(b) "
-                message_body += option_array[j][1] + ": " + str(course_response_array[i][j][1]) + "\n"
+                message_body += option_array[j][1] + ": " + \
+                    str(course_response_array[i][j][1]) + "\n"
                 message_body += "(c) "
-                message_body += option_array[j][2] + ": " + str(course_response_array[i][j][2]) + "\n"
+                message_body += option_array[j][2] + ": " + \
+                    str(course_response_array[i][j][2]) + "\n"
                 message_body += "(d) "
-                message_body += option_array[j][3] + ": " + str(course_response_array[i][j][3]) + "\n"
+                message_body += option_array[j][3] + ": " + \
+                    str(course_response_array[i][j][3]) + "\n"
                 message_body += "\n"
             for l in range(6, 16):
                 message_body += str(l+1) + ". "
                 message_body += question_array[l] + "\n"
                 message_body += "(a) "
-                message_body += option_array[l][0] + ": " + str(course_response_array[i][l][0]) + "\n"
+                message_body += option_array[l][0] + ": " + \
+                    str(course_response_array[i][l][0]) + "\n"
                 message_body += "(b) "
-                message_body += option_array[l][1] + ": " + str(course_response_array[i][l][1]) + "\n"
+                message_body += option_array[l][1] + ": " + \
+                    str(course_response_array[i][l][1]) + "\n"
                 message_body += "(c) "
-                message_body += option_array[l][2] + ": " + str(course_response_array[i][l][2]) + "\n"
+                message_body += option_array[l][2] + ": " + \
+                    str(course_response_array[i][l][2]) + "\n"
                 message_body += "(d) "
-                message_body += option_array[l][3] + ": " + str(course_response_array[i][l][3]) + "\n"
+                message_body += option_array[l][3] + ": " + \
+                    str(course_response_array[i][l][3]) + "\n"
                 message_body += "(e) "
-                message_body += option_array[l][4] + ": " + str(course_response_array[i][l][4]) + "\n"
+                message_body += option_array[l][4] + ": " + \
+                    str(course_response_array[i][l][4]) + "\n"
                 message_body += "\n"
 
             message = message_header + "\n\n" + message_body
             sendEmail(message, self.email_id.text())
             message = ""
+
 
 class Administrator(QWidget):
     def __init__(self):
@@ -298,7 +314,7 @@ class Administrator(QWidget):
         self.consolidated_window.setFixedSize(450, 250)
         consolidated_form.clicked.connect(self.show_consolidated)
         self.course_window = Course_Management()
-        self.course_window.setGeometry(300, 300, 400, 100)     
+        self.course_window.setGeometry(300, 300, 400, 100)
         course_mgmt.clicked.connect(self.show_course)
 
         vbox.addWidget(course_mgmt, 2)
@@ -379,7 +395,7 @@ class Course_Management(QWidget):
         hbox1.addWidget(self.name)
         vbox1.addLayout(hbox1)
         vbox1.addWidget(self.submit_button)
-        vbox1.setContentsMargins(0, 0, 0,20)
+        vbox1.setContentsMargins(0, 0, 0, 20)
         self.submit_button.setStyleSheet(stylesheet_QPushButton1)
         self.submit_button.setSizePolicy(
             QSizePolicy.Preferred, QSizePolicy.Expanding)
@@ -434,7 +450,6 @@ class Course_Management(QWidget):
         return cb
 
 
-
 class Teacher_Management(QWidget):
     def __init__(self):
         super().__init__()
@@ -459,7 +474,7 @@ class Teacher_Management(QWidget):
         hbox1.addWidget(self.name)
         vbox1.addLayout(hbox1)
         vbox1.addWidget(self.submit_button)
-        vbox1.setContentsMargins(0, 0, 0,20)
+        vbox1.setContentsMargins(0, 0, 0, 20)
         self.submit_button.setStyleSheet(stylesheet_QPushButton1)
         self.submit_button.setSizePolicy(
             QSizePolicy.Preferred, QSizePolicy.Expanding)
@@ -718,7 +733,7 @@ class Form(QWidget):
         self.option73.setStyleSheet(stylesheet_QRadioButton)
         self.option74.setStyleSheet(stylesheet_QRadioButton)
         self.option75.setStyleSheet(stylesheet_QRadioButton)
-        hbox.setContentsMargins(10, 20, 10,20)      
+        hbox.setContentsMargins(10, 20, 10, 20)
         groupbox7.setLayout(hbox)
         groupbox_layout.addWidget(groupbox7)
 
@@ -740,7 +755,7 @@ class Form(QWidget):
         self.option83.setStyleSheet(stylesheet_QRadioButton)
         self.option84.setStyleSheet(stylesheet_QRadioButton)
         self.option85.setStyleSheet(stylesheet_QRadioButton)
-        hbox.setContentsMargins(10, 20, 10,20)      
+        hbox.setContentsMargins(10, 20, 10, 20)
         groupbox8.setLayout(hbox)
         groupbox_layout.addWidget(groupbox8)
 
@@ -762,7 +777,7 @@ class Form(QWidget):
         self.option93.setStyleSheet(stylesheet_QRadioButton)
         self.option94.setStyleSheet(stylesheet_QRadioButton)
         self.option95.setStyleSheet(stylesheet_QRadioButton)
-        hbox.setContentsMargins(10, 20, 10,20)      
+        hbox.setContentsMargins(10, 20, 10, 20)
         groupbox9.setLayout(hbox)
         groupbox_layout.addWidget(groupbox9)
 
@@ -784,7 +799,7 @@ class Form(QWidget):
         self.option103.setStyleSheet(stylesheet_QRadioButton)
         self.option104.setStyleSheet(stylesheet_QRadioButton)
         self.option105.setStyleSheet(stylesheet_QRadioButton)
-        hbox.setContentsMargins(10, 20, 10,20)      
+        hbox.setContentsMargins(10, 20, 10, 20)
         groupbox10.setLayout(hbox)
         groupbox_layout.addWidget(groupbox10)
 
@@ -806,7 +821,7 @@ class Form(QWidget):
         self.option113.setStyleSheet(stylesheet_QRadioButton)
         self.option114.setStyleSheet(stylesheet_QRadioButton)
         self.option115.setStyleSheet(stylesheet_QRadioButton)
-        hbox.setContentsMargins(10, 20, 10,20)      
+        hbox.setContentsMargins(10, 20, 10, 20)
         groupbox11.setLayout(hbox)
         groupbox_layout.addWidget(groupbox11)
 
@@ -828,7 +843,7 @@ class Form(QWidget):
         self.option123.setStyleSheet(stylesheet_QRadioButton)
         self.option124.setStyleSheet(stylesheet_QRadioButton)
         self.option125.setStyleSheet(stylesheet_QRadioButton)
-        hbox.setContentsMargins(10, 20, 10,20)      
+        hbox.setContentsMargins(10, 20, 10, 20)
         groupbox12.setLayout(hbox)
         groupbox_layout.addWidget(groupbox12)
 
@@ -850,7 +865,7 @@ class Form(QWidget):
         self.option133.setStyleSheet(stylesheet_QRadioButton)
         self.option134.setStyleSheet(stylesheet_QRadioButton)
         self.option135.setStyleSheet(stylesheet_QRadioButton)
-        hbox.setContentsMargins(10, 20, 10,20)      
+        hbox.setContentsMargins(10, 20, 10, 20)
         groupbox13.setLayout(hbox)
         groupbox_layout.addWidget(groupbox13)
 
@@ -872,7 +887,7 @@ class Form(QWidget):
         self.option143.setStyleSheet(stylesheet_QRadioButton)
         self.option144.setStyleSheet(stylesheet_QRadioButton)
         self.option145.setStyleSheet(stylesheet_QRadioButton)
-        hbox.setContentsMargins(10, 20, 10,20)      
+        hbox.setContentsMargins(10, 20, 10, 20)
         groupbox14.setLayout(hbox)
         groupbox_layout.addWidget(groupbox14)
 
@@ -894,7 +909,7 @@ class Form(QWidget):
         self.option153.setStyleSheet(stylesheet_QRadioButton)
         self.option154.setStyleSheet(stylesheet_QRadioButton)
         self.option155.setStyleSheet(stylesheet_QRadioButton)
-        hbox.setContentsMargins(10, 20, 10,20)      
+        hbox.setContentsMargins(10, 20, 10, 20)
         groupbox15.setLayout(hbox)
         groupbox_layout.addWidget(groupbox15)
 
@@ -916,7 +931,7 @@ class Form(QWidget):
         self.option163.setStyleSheet(stylesheet_QRadioButton)
         self.option164.setStyleSheet(stylesheet_QRadioButton)
         self.option165.setStyleSheet(stylesheet_QRadioButton)
-        hbox.setContentsMargins(10, 20, 10,20)      
+        hbox.setContentsMargins(10, 20, 10, 20)
         groupbox16.setLayout(hbox)
         groupbox_layout.addWidget(groupbox16)
 
@@ -927,7 +942,7 @@ class Form(QWidget):
         self.form_submit.clicked.connect(lambda: self.submit_form())
 
         sbox_layout.addWidget(self.form_submit)
-        sbox_layout.setContentsMargins(820, 40, 820,20)
+        sbox_layout.setContentsMargins(820, 40, 820, 20)
 
         groupbox_layout.setSpacing(30)
         layout.addLayout(groupbox_layout)
@@ -1022,7 +1037,8 @@ class Form(QWidget):
         teacher_name = self.cb.currentText()
         course_name = self.course_cb.currentText()
 
-        array_selected_answers = [ans1, ans2, ans3, ans4, ans5, ans6, ans7, ans8, ans9, ans10, ans11, ans12, ans13, ans14, ans15, ans16]
+        array_selected_answers = [ans1, ans2, ans3, ans4, ans5, ans6, ans7,
+                                  ans8, ans9, ans10, ans11, ans12, ans13, ans14, ans15, ans16]
 
         if 0 in array_selected_answers:
             errorMessage("Fill Form")
@@ -1033,7 +1049,8 @@ class Form(QWidget):
             new_teacher_name = teacher_name.replace(".", " ")
             new_string = '/' + new_teacher_name + "/" + course_name
 
-            answer1_array = [[0 for i in range(4)] for j in range(6)] + [[0 for k in range(5)] for l in range(10)]
+            answer1_array = [[0 for i in range(4)] for j in range(
+                6)] + [[0 for k in range(5)] for l in range(10)]
             answer1_array[0][ans1-1] += 1
             answer1_array[1][ans2-1] += 1
             answer1_array[2][ans3-1] += 1
