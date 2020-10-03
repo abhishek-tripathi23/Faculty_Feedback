@@ -22,8 +22,7 @@ stylesheet_slider_label = 'QLabel{font: 12pt Arial }'
 
 
 fire = firebase.FirebaseApplication(
-    "****", None)
-# Your Firebase Id in place of ******
+    "https://faculty-3a510.firebaseio.com/", None)
 
 answer_array = []
 question_array = ["Course Content", "Relevance of the course in the overall structure of program", "Overlap with other courses",
@@ -54,16 +53,14 @@ def sendEmail(message_body, to_email):
 
         # Authentication
 
-        s.login("******", "******")
-        #Gmail account and password in place of *****
+        s.login("facultyfeedback.uiet@gmail.com", "uietpu2019")
 
         # message to be sent
         message = message_body
 
         # sending the mail
-        s.sendmail("*****",
+        s.sendmail("facultyfeedback.uiet@gmail.com",
                    to_email, message)
-        # Gmail account in place of *****
 
         # terminating the session
         s.quit()
